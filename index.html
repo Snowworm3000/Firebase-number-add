@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Type Words!</title>
+    </head>
+    <body>
+        <h1>The button has been clicked the amount of times displayed below</h1>
+        <h1 id="object"></h1>
+        <button onclick="addOne()">Click me!</button>
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDveUv5uKebuUkp4ZrOwca4CeTLI_iHU7k",
+    authDomain: "lots-of-words.firebaseapp.com",
+    databaseURL: "https://lots-of-words.firebaseio.com",
+    projectId: "lots-of-words",
+    storageBucket: "lots-of-words.appspot.com",
+    messagingSenderId: "303234769638",
+    appId: "1:303234769638:web:5bda99d4d0556b5e3ad127",
+    measurementId: "G-6MD93R3TCN"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  var database = firebase.database();
+
+  //--------------------------------------------------------------------//
+var preObject = document.getElementById("object");
+var number;
+var dbRefObject = firebase.database().ref().child("number");
+dbRefObject.on("value", snap =>{
+    console.log(snap.val())
+    window.number = snap.val();
+    document.getElementById("object").innerHTML = snap.val()
+});
+function addOne(){
+    console.log(number)
+    firebase.database().ref().child("number").set(number + 1)
+}
+
+
+</script>
+
+    </body>
+</html>
